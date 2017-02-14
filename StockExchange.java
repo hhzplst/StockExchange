@@ -33,6 +33,14 @@ public class StockExchange {
     status = (rd.nextDouble() < 0.5)? 0 : 1;
   }
 
+  public int getStatus() {
+    return status;
+  }
+
+  public int changeBy() {
+    return changeBy;
+  }
+
   private static void printMessage(int mode, StockCustomer sc) {
     if (mode == 1)
       System.out.printf("\nWelcome, %s. You are now registered.\n", sc.getName());
