@@ -37,8 +37,14 @@ public class StockExchange {
     return status;
   }
 
-  public int changeBy() {
+  public int getChangeBy() {
     return changeBy;
+  }
+
+  public void notifyObservers() {
+    PriceChangedEvent e = new PriceChangedEvent(this);
+    for (StockCustomer sc : registerList)
+      sc.priceChanged(e);
   }
 
   private static void printMessage(int mode, StockCustomer sc) {
