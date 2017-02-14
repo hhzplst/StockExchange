@@ -1,5 +1,5 @@
 public class StockPricePrinter extends StockCustomer {
-  void priceChanged(PriceChangedEvent) {
+  public void priceChanged(PriceChangedEvent e) {
     //Printer's way of handling the event
   }
 }
