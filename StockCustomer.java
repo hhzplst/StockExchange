@@ -5,4 +5,8 @@ public abstract class StockCustomer implements StockObserver {
   public String getName() {
     return name;
   }
+
+  protected void setName(String newName) {
+    name = newName;
+  }
 }
