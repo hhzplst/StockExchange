@@ -1,8 +1,8 @@
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.Random;
 
 public class StockExchange implements Runnable {
-  private ArrayList<StockCustomer> registerList = new ArrayList<>();
+  private CopyOnWriteArrayList<StockCustomer> registerList = new CopyOnWriteArrayList<>();
   private int status;
   private boolean stopRequested = false;
 
@@ -30,7 +30,7 @@ public class StockExchange implements Runnable {
   }
 
   public void run() {
-    while (!stopRequested) {
+    while (!stopRequested && (registerList.size() != 1)) {
       try {
         stockChange();
         notifyObservers();

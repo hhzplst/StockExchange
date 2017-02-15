@@ -3,7 +3,7 @@ public class PriceChangedEvent {
   public int status;
 
   public PriceChangedEvent(StockExchange stock) {
-    stock = stock;
+    this.stock = stock;
     status = stock.getStatus();
   }
 }
