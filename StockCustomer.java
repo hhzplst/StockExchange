@@ -1,5 +1,6 @@
 public abstract class StockCustomer implements StockObserver {
   protected String name;
+  protected PriceChangedEvent event;
   public abstract void priceChanged(PriceChangedEvent e);
 
   public StockCustomer(String name) {

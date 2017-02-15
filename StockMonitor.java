@@ -2,7 +2,6 @@ public class StockMonitor extends StockCustomer {
   private int threshold;
   private int start = 0, count = 0;
   private boolean hasReachedThreshold = false;
-  private PriceChangedEvent event;
 
   public StockMonitor(String name, int threshold) throws Exception {
     super(name);
