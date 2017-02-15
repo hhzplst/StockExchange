@@ -1,13 +1,10 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class StockExchange {
+public class StockExchange implements Runnable {
   private ArrayList<StockCustomer> registerList = new ArrayList<>();
-  private int changeBy, status;
-
-  public StockExchange(int changeBy) {
-    changeBy = changeBy;
-  }
+  private int status;
+  private boolean stopRequested = false;
 
   public void addObserver(StockCustomer sc) {
     if (registerList.contains(sc))
@@ -27,21 +24,32 @@ public class StockExchange {
     }
   }
 
-  //should this be public?
-  public void stockChange() {
+  private void stockChange() {
     Random rd = new Random();
-    status = (rd.nextDouble() < 0.5)? 0 : 1;
+    status = (rd.nextDouble() < 0.5)? -1 : 1;
+  }
+
+  public void run() {
+    while (!stopRequested) {
+      try {
+        stockChange();
+        notifyObservers();
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+        System.out.println("The thread has been interrupted.");
+      }
+    }
+  }
+
+  public void requestStop() {
+    stopRequested = true;
   }
 
   public int getStatus() {
     return status;
   }
 
-  public int getChangeBy() {
-    return changeBy;
-  }
-
-  public void notifyObservers() {
+  private void notifyObservers() {
     PriceChangedEvent e = new PriceChangedEvent(this);
     for (StockCustomer sc : registerList)
       sc.priceChanged(e);
