@@ -9,7 +9,7 @@ public class StockPricePrinter extends StockCustomer {
 
   public void priceChanged(PriceChangedEvent e) {
     event = e;
-    if (event.status == -1) plot.add("\u2193");
+    if (event.getStatus() == -1) plot.add("\u2193");
     else plot.add("\u2191");
     //to avoid long output
     //plot();

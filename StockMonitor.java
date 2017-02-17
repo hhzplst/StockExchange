@@ -12,7 +12,7 @@ public class StockMonitor extends StockCustomer {
 
   public void priceChanged(PriceChangedEvent e) {
     this.event = e;
-    start += event.status;    
+    start += event.getStatus();    
     checkthreshold();
   }
 
@@ -20,11 +20,11 @@ public class StockMonitor extends StockCustomer {
     count++;
     if (start == threshold) { 
       System.out.printf("\nStock price has gone up by %d in %d steps. Removing monitor %s ...\n", threshold, count, this.getName());
-      event.stock.removeObserver(this);
+      event.getStock().removeObserver(this);
     }
     if (start == -threshold) {
       System.out.printf("\nStock price has gone down by %d in %d steps. Removing monitor %s ...\n", threshold, count, this.getName());
-      event.stock.removeObserver(this);
+      event.getStock().removeObserver(this);
     }
   }
 }
